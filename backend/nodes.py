@@ -5,9 +5,9 @@ from __future__ import annotations
 from langchain_groq import ChatGroq
 from langgraph.types import interrupt
 
-from research_agent.config import load_settings
-from research_agent.state import AgentState
-from research_agent.tools import google_search_tool, scrape_page_tool
+from backend.config import load_settings
+from backend.state import AgentState
+from backend.tools import google_search_tool, scrape_page_tool
 
 _settings = load_settings()
 llm = ChatGroq(model="openai/gpt-oss-120b", temperature=0, api_key=_settings.groq_api_key)

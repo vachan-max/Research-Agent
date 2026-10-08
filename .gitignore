@@ -28,6 +28,7 @@ frontend/dist/
 frontend/.vite/
 frontend/package-lock.json
 frontend/package.json
+frontend/vite.config.js
 
 .python-version
 pyproject.toml
@@ -37,3 +38,7 @@ Logs and operating-system files
 *.log
 .DS_Store
 Thumbs.db
+
+# Keep project manifests under version control.
+!pyproject.toml
+!frontend/package.json

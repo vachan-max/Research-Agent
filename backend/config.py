@@ -29,8 +29,8 @@ def load_settings(env_file: str | Path | None = None) -> Settings:
         ValueError: If one or more required keys are missing or blank.
     """
     if env_file is None:
-        # Support running from the repository root or another working directory.
-        package_env = Path(__file__).resolve().parents[2] / ".env"
+        # Resolve beside this module so the backend .env works from any cwd.
+        package_env = Path(__file__).resolve().parent / ".env"
         load_dotenv(dotenv_path=package_env, override=False)
         load_dotenv(override=False)
     else:

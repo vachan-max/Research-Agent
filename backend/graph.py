@@ -5,13 +5,13 @@ from __future__ import annotations
 from langgraph.graph import END, START, StateGraph
 from langgraph.checkpoint.memory import MemorySaver
 
-from research_agent.nodes import (
+from backend.nodes import (
     generate_report_node,
     review_sources_node,
     scrape_links_node,
     search_web_node,
 )
-from research_agent.state import AgentState
+from backend.state import AgentState
 
 builder = StateGraph(AgentState)
 builder.add_node("search_web_node", search_web_node)

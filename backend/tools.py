@@ -7,7 +7,7 @@ from typing import Any
 from firecrawl import FirecrawlApp
 from langchain_core.tools import tool
 
-from research_agent.config import load_settings
+from backend.config import load_settings
 
 
 @tool
