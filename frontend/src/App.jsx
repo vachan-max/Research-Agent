@@ -35,11 +35,22 @@ export default function App() {
   const [selectedSources, setSelectedSources] = useState([])
   const [extraUrls, setExtraUrls] = useState('')
   const [reviewSubmitting, setReviewSubmitting] = useState(false)
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = window.localStorage.getItem('dashboard-theme')
+    if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
   const abortRef = useRef(null)
 
   const busy = ['searching', 'scraping', 'generating', 'reviewing'].includes(status)
 
   useEffect(() => () => abortRef.current?.abort(), [])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    document.documentElement.style.colorScheme = theme
+    window.localStorage.setItem('dashboard-theme', theme)
+  }, [theme])
 
   async function handleSearch(event) {
     event.preventDefault()
@@ -173,8 +184,8 @@ export default function App() {
   }
 
  return (
-  <div id="top" className="min-h-screen bg-slate-50 text-slate-900">
-    <Header />
+  <div id="top" className="min-h-screen bg-slate-50 text-slate-900 transition-colors">
+    <Header theme={theme} onToggleTheme={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')} />
     <main className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-10 sm:px-8 sm:py-14">
       <SearchBar query={query} setQuery={setQuery} onSubmit={handleSearch} loading={busy} />
       
